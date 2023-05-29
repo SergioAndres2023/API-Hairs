@@ -21,6 +21,3 @@ export async function register(req, res) {
 
   res.json(token);
 }
-
-export async function login(){
-}

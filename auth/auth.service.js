@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import { hashSync, compareSync } from 'bcrypt';
-// import * as usersRepository from '../users/users.repository.js';
 
 function getToken({ username }) {
   const payload = {
@@ -37,7 +36,4 @@ export async function register({ username, password }) {
   }
 
   return token;
-}
-
-export async function login() {
 }
