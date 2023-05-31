@@ -1,7 +1,9 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import * as dotenv from 'dotenv';
 
-/* const MONGO_DB_NAME = 'Backend';
-const MONGO_URL = 'mongodb+srv://admin:admin@cluster0.bt82yzh.mongodb.net/';
+dotenv.config();
+
+const { MONGO_DB_NAME, MONGO_URL } = process.env;
 
 const connectionConfig = { dbName: MONGO_DB_NAME, autoIndex: true };
 mongoose.set('strictQuery', true);
@@ -11,4 +13,4 @@ if (connection) {
   console.log('Connection with mongo database successfully');
 } else {
   console.log('Error to connect with mongo database');
-} */
+}
