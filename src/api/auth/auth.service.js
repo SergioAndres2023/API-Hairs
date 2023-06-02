@@ -50,7 +50,6 @@ export async function login({ username, password }) {
     throw new Error(JSON.stringify(myError));
   }
 
-  // const isSamepassword = dbUser.password === password;
   const isSamePassword = compareSync(password, dbUser.password);
   if (!isSamePassword) {
     const myError = {
