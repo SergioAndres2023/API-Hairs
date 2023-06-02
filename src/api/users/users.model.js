@@ -1,13 +1,13 @@
 import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema({
-  name: { type: String, required: [true, 'El nombre es obligatorio'] }, // ¿ponemos mensajes para informar?
-  Phone: { type: String, required: true },
-  Mail: { type: String, required: true },
-  Points: { type: Number, required: true, default: 0 },
+  name: { type: String, required: [true, 'El nombre es obligatorio'] },
+  phone: { type: String, required: true },
+  mail: { type: String, required: true },
+  points: { type: Number, required: true, default: 0 },
   password: { type: String, required: true },
-  Deleted: { type: Boolean, required: true, default: false },
-  Rol: { type: String, required: true, enum: ['admin', 'client'] },
+  deleted: { type: Boolean, required: true, default: false },
+  rol: { type: String, required: true, enum: ['admin', 'client'] },
 });
 
 const userModel = model('User', userSchema);
