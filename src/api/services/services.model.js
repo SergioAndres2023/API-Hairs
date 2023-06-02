@@ -1,24 +1,23 @@
 import { Schema, model } from 'mongoose';
 
 const serviceSchema = new Schema({
-  // nombre: String,
-  serviceName: {
+  name: {
     type: String,
     required: true,
   },
-  servicePrice: {
+  price: {
     type: Number,
     required: true,
   },
-  servicePoints: {
+  points: {
     type: Number,
     required: true,
   },
-  serviceMinutes: {
+  minutes: {
     type: Number,
     required: true,
   },
-  serviceDeleted: {
+  deleted: {
     type: Boolean,
     required: true,
     default: false,
