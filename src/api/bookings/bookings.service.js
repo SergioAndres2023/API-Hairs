@@ -9,3 +9,8 @@ export async function create({ bookingDataValidated }) {
   const newBooking = await bookingsRepository.create({ bookingDataValidated });
   return newBooking;
 }
+
+export async function logicDelete({ id }) {
+  const activeUsers = await bookingsRepository.logicDelete({ id });
+  return activeUsers;
+}

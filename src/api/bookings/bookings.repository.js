@@ -20,3 +20,12 @@ export async function create({ bookingDataValidated }) {
 
   return newBooking;
 }
+
+export async function logicDelete({ id }) {
+  await bookingModel
+    .findByIdAndUpdate({ _id: id }, { deleted: true }, { new: true })
+    .lean();
+  const activeUsers = await bookingModel
+    .find({ deleted: false });
+  return activeUsers;
+}

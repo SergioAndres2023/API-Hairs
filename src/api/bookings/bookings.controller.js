@@ -12,3 +12,9 @@ export async function create(req, res) {
   const newBooking = await bookingsService.create({ bookingDataValidated });
   res.json(newBooking);
 }
+
+export async function logicDelete(req, res) {
+  const { id } = req.params;
+  const activeUsers = await bookingsService.logicDelete({ id });
+  res.json(activeUsers);
+}
