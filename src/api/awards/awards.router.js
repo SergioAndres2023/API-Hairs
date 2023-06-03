@@ -8,5 +8,6 @@ router.get('/all', awardsController.getAll);
 router.post('/', awardsController.create);
 
 router.patch('/update/:id', awardsController.update);
+router.patch('/cancel/:id', awardsController.cancel);
 
 export default router;
