@@ -29,6 +29,11 @@ export async function create(req, res) {
 export async function update(req, res) {
   const { id } = req.params;
   const bookingDataToValidate = req.body;
+  if (!validBooking(bookingDataToValidate)) {
+    res.status(500);
+    res.json('Data validation error');
+    return;
+  }
   const bookingDataValidated = bookingDataToValidate;
   const updatedBooking = await bookingsService.update({ id, bookingDataValidated });
   res.json(updatedBooking);
