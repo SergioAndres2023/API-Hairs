@@ -8,13 +8,6 @@ export async function getAll() {
   return users;
 }
 
-// export async function getById({ id }) {
-//   const user = await userModel.getById(id)
-//     .lean();
-
-//   return user;
-// }
-
 export async function getById({ id }) {
   const user = await userModel
     .findById(id)
