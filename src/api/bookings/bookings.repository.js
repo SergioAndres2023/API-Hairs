@@ -8,10 +8,10 @@ export async function getByDate({ date }) {
   return activeUsers;
 }
 
-export async function create({ bookingDataValidated }) {
+export async function create({ bookingData }) {
   const {
     date, state, userId, serviceId,
-  } = bookingDataValidated;
+  } = bookingData;
 
   const newBooking = await bookingModel
     .create({
@@ -28,4 +28,13 @@ export async function archive({ id }) {
   const activeUsers = await bookingModel
     .find({ deleted: false });
   return activeUsers;
+}
+
+export async function update({ id, bookingData }) {
+  const updatedBooking = await bookingModel
+    .findOneAndUpdate({
+      _id: id,
+    }, bookingData, { new: true })
+    .lean();
+  return updatedBooking;
 }
