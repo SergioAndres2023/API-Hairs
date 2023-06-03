@@ -14,3 +14,8 @@ export async function update({ id, propsToUpdate }) {
   const updatedProps = await servicesRepo.update({ id, propsToUpdate });
   return updatedProps;
 }
+
+export async function archive({ id }) {
+  const serviceToArchive = await servicesRepo.archive({ id });
+  return serviceToArchive;
+}

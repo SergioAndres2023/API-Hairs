@@ -17,3 +17,13 @@ export async function update(req, res) {
   const updatedProps = await servicesService.update({ id, propsToUpdate });
   res.json(updatedProps);
 }
+
+export async function archive(req, res) {
+  const { id } = req.params;
+  if (!id) {
+    res.status(400);
+    res.json('Empty required params');
+  }
+  const serviceToArchive = await servicesService.archive({ id });
+  res.json(serviceToArchive);
+}
