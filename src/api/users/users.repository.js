@@ -8,6 +8,14 @@ export async function getAll() {
   return users;
 }
 
+export async function getById({ id }) {
+  const user = await userModel
+    .findById(id)
+    .lean();
+
+  return user;
+}
+
 export async function create({ username, password }) {
   const newUser = await userModel.create({ username, password });
   return newUser;
