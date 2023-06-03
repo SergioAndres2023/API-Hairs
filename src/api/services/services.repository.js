@@ -11,3 +11,9 @@ export async function create({ serviceData }) {
     .create(serviceData);
   return newService;
 }
+
+export async function update({ id, propsToUpdate }) {
+  const updatedProps = await servicesModel
+    .findByIdAndUpdate({ _id: id }, propsToUpdate, { new: true });
+  return updatedProps;
+}
