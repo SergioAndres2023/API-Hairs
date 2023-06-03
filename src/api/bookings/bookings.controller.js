@@ -13,8 +13,8 @@ export async function create(req, res) {
   res.json(newBooking);
 }
 
-export async function logicDelete(req, res) {
+export async function archive(req, res) {
   const { id } = req.params;
-  const activeUsers = await bookingsService.logicDelete({ id });
+  const activeUsers = await bookingsService.archive({ id });
   res.json(activeUsers);
 }

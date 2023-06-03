@@ -21,7 +21,7 @@ export async function create({ bookingDataValidated }) {
   return newBooking;
 }
 
-export async function logicDelete({ id }) {
+export async function archive({ id }) {
   await bookingModel
     .findByIdAndUpdate({ _id: id }, { deleted: true }, { new: true })
     .lean();

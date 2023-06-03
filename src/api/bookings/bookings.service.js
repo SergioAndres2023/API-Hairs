@@ -10,7 +10,7 @@ export async function create({ bookingDataValidated }) {
   return newBooking;
 }
 
-export async function logicDelete({ id }) {
-  const activeUsers = await bookingsRepository.logicDelete({ id });
+export async function archive({ id }) {
+  const activeUsers = await bookingsRepository.archive({ id });
   return activeUsers;
 }
