@@ -1,7 +1,7 @@
 import Router from 'express';
 import usersRouter from './users/users.router.js';
 import servicesRouter from './services/services.router.js';
-import awardsRouter from './awards/awards.router.js';
+import awardsRouter from './adwars/awards.router.js';
 import * as authController from './auth/auth.controller.js';
 
 const router = Router();
