@@ -10,3 +10,10 @@ export async function create(req, res) {
   const awards = await awardsAward.create({ awardData });
   res.json(awards);
 }
+
+export async function update(req, res) {
+  const { id } = req.params;
+  const propsToUpdate = req.body;
+  const updatedProps = await awardsAward.update({ id, propsToUpdate });
+  res.json(updatedProps);
+}
