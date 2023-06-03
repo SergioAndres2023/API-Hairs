@@ -15,26 +15,24 @@ export async function getByDate(req, res) {
 }
 
 export async function create(req, res) {
-  const bookingDataToValidate = req.body;
-  if (!validBooking(bookingDataToValidate)) {
+  const bookingData = req.body;
+  if (!validBooking(bookingData)) {
     res.status(500);
     res.json('Data validation error');
     return;
   }
-  const bookingDataValidated = bookingDataToValidate;
-  const newBooking = await bookingsService.create({ bookingDataValidated });
+  const newBooking = await bookingsService.create({ bookingData });
   res.json(newBooking);
 }
 
 export async function update(req, res) {
   const { id } = req.params;
-  const bookingDataToValidate = req.body;
-  if (!validBooking(bookingDataToValidate)) {
+  const bookingData = req.body;
+  if (!validBooking(bookingData)) {
     res.status(500);
     res.json('Data validation error');
     return;
   }
-  const bookingDataValidated = bookingDataToValidate;
-  const updatedBooking = await bookingsService.update({ id, bookingDataValidated });
+  const updatedBooking = await bookingsService.update({ id, bookingData });
   res.json(updatedBooking);
 }

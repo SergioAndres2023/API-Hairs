@@ -5,12 +5,12 @@ export async function getByDate({ date }) {
   return activeUsers;
 }
 
-export async function create({ bookingDataValidated }) {
-  const newBooking = await bookingsRepository.create({ bookingDataValidated });
+export async function create({ bookingData }) {
+  const newBooking = await bookingsRepository.create({ bookingData });
   return newBooking;
 }
 
-export async function update({ id, bookingDataValidated }) {
-  const updatedBooking = await bookingsRepository.update({ id, bookingDataValidated });
+export async function update({ id, bookingData }) {
+  const updatedBooking = await bookingsRepository.update({ id, bookingData });
   return updatedBooking;
 }

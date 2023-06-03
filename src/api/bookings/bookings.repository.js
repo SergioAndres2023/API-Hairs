@@ -8,10 +8,10 @@ export async function getByDate({ date }) {
   return activeUsers;
 }
 
-export async function create({ bookingDataValidated }) {
+export async function create({ bookingData }) {
   const {
     date, state, userId, serviceId,
-  } = bookingDataValidated;
+  } = bookingData;
 
   const newBooking = await bookingModel
     .create({
@@ -21,11 +21,11 @@ export async function create({ bookingDataValidated }) {
   return newBooking;
 }
 
-export async function update({ id, bookingDataValidated }) {
+export async function update({ id, bookingData }) {
   const updatedBooking = await bookingModel
     .findOneAndUpdate({
       _id: id,
-    }, bookingDataValidated, { new: true })
+    }, bookingData, { new: true })
     .lean();
   return updatedBooking;
 }
