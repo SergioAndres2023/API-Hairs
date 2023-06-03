@@ -25,6 +25,12 @@ export async function create(req, res) {
   res.json(newBooking);
 }
 
+export async function archive(req, res) {
+  const { id } = req.params;
+  const activeUsers = await bookingsService.archive({ id });
+  res.json(activeUsers);
+}
+
 export async function update(req, res) {
   const { id } = req.params;
   const bookingData = req.body;

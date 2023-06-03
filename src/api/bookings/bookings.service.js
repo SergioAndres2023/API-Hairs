@@ -10,6 +10,11 @@ export async function create({ bookingData }) {
   return newBooking;
 }
 
+export async function archive({ id }) {
+  const activeUsers = await bookingsRepository.archive({ id });
+  return activeUsers;
+}
+
 export async function update({ id, bookingData }) {
   const updatedBooking = await bookingsRepository.update({ id, bookingData });
   return updatedBooking;

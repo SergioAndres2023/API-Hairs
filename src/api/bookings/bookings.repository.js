@@ -21,6 +21,15 @@ export async function create({ bookingData }) {
   return newBooking;
 }
 
+export async function archive({ id }) {
+  await bookingModel
+    .findByIdAndUpdate({ _id: id }, { deleted: true }, { new: true })
+    .lean();
+  const activeUsers = await bookingModel
+    .find({ deleted: false });
+  return activeUsers;
+}
+
 export async function update({ id, bookingData }) {
   const updatedBooking = await bookingModel
     .findOneAndUpdate({
