@@ -15,7 +15,7 @@ export async function update({ id, propsToUpdate }) {
   return updatedProps;
 }
 
-export async function cancel({ id }) {
+export async function archive({ id }) {
   const awardToArchive = await awardsRepo.archive({ id });
   return awardToArchive;
 }
