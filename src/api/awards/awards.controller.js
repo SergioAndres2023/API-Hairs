@@ -18,12 +18,12 @@ export async function update(req, res) {
   res.json(updatedProps);
 }
 
-export async function cancel(req, res) {
+export async function archive(req, res) {
   const { id } = req.params;
   if (!id) {
     res.status(400);
     res.json('Empty required params');
   }
-  const awardToArchive = await awardsAward.cancel({ id });
+  const awardToArchive = await awardsAward.archive({ id });
   res.json(awardToArchive);
 }

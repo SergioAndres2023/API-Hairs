@@ -19,7 +19,7 @@ export async function update({ id, propsToUpdate }) {
   return updatedProps;
 }
 
-export async function cancel({ id }) {
+export async function archive({ id }) {
   const awardToArchive = await awardsModel
     .findByIdAndUpdate(id, { deleted: true });
   return awardToArchive;
