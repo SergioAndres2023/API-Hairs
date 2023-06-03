@@ -9,3 +9,8 @@ export async function create({ bookingDataValidated }) {
   const newBooking = await bookingsRepository.create({ bookingDataValidated });
   return newBooking;
 }
+
+export async function update({ id, bookingDataValidated }) {
+  const updatedBooking = await bookingsRepository.update({ id, bookingDataValidated });
+  return updatedBooking;
+}

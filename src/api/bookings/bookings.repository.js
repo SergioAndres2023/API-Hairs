@@ -20,3 +20,12 @@ export async function create({ bookingDataValidated }) {
 
   return newBooking;
 }
+
+export async function update({ id, bookingDataValidated }) {
+  const updatedBooking = await bookingModel
+    .findOneAndUpdate({
+      _id: id,
+    }, bookingDataValidated, { new: true })
+    .lean();
+  return updatedBooking;
+}
