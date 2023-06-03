@@ -17,3 +17,13 @@ export async function update(req, res) {
   const updatedProps = await awardsAward.update({ id, propsToUpdate });
   res.json(updatedProps);
 }
+
+export async function archive(req, res) {
+  const { id } = req.params;
+  if (!id) {
+    res.status(400);
+    res.json('Empty required params');
+  }
+  const awardToArchive = await awardsAward.archive({ id });
+  res.json(awardToArchive);
+}
