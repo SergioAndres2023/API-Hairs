@@ -12,3 +12,9 @@ export async function create({ awardData }) {
     .create(awardData);
   return newAward;
 }
+
+export async function update({ id, propsToUpdate }) {
+  const updatedProps = await awardsModel
+    .findByIdAndUpdate({ _id: id }, propsToUpdate, { new: true });
+  return updatedProps;
+}
