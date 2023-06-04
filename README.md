@@ -26,34 +26,34 @@ When you log in you can create appointments for selected services, these are sav
 # 📋 Pre requirements
 1 - In order to start the project first make a clone:
 
-git clone (...)
+> git clone (...)
 
 2 - Once the project is cloned, you must install the necessary modules with npm:
 
-npm install
+> npm install
 
 3 - You should rename the "config-example.json" file to "config.json"
 
-Then edit the "development" fields with your "name", "password", "db name" and "secret word".
+> Then edit the "development" fields with your "name", "password", "db name" and "secret word".
 
 4 - Create Database
 
-db = mongoose.connect('mongodb://localhost/hairsDB')
+> db = mongoose.connect('mongodb://localhost/hairsDB')
 
 5 - Database Migration
 
-sequelize db:migrate
+> sequelize db:migrate
 
 6 - Running the Seeder
 
-sequelize db:seed:all
+> sequelize db:seed:all
 
 7 - The project is ready to start
 
-npm start
+> npm start
 
-# 📷 Mongo Diagram
-
+# 📷 Preview
+### MongoDB Diagram 
 ![image](https://github.com/SergioAndres2023/API-Hairs/assets/123268218/d0d32d21-94c0-4dc1-a447-d705cd98f000)
 
 
