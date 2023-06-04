@@ -32,23 +32,7 @@ When you log in you can create appointments for selected services, these are sav
 
 > npm install
 
-3 - You should rename the "config-example.json" file to "config.json"
-
-> Then edit the "development" fields with your "name", "password", "db name" and "secret word".
-
-4 - Create Database
-
-> db = mongoose.connect('mongodb://localhost/hairsDB')
-
-5 - Database Migration
-
-> sequelize db:migrate
-
-6 - Running the Seeder
-
-> sequelize db:seed:all
-
-7 - The project is ready to start
+3 - The project is ready to start
 
 > npm start
 
