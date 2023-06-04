@@ -19,7 +19,7 @@ This project consists of the development of an online appointment book for haird
 - Git / GitHub
 
 ## 👾 Description of the utility of the project
-The goal is create an online appointment book for customers from hairdressing services.
+The goal is create an online appointment book for customers and hairdressing services.
 Both professionals and customers could create appointments depending of the user role. There are two kind of roles, admin and customers.
 When you log in you can create appointments for selected services, these are saved in your user as my appointments.
 
