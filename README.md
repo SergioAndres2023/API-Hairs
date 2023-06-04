@@ -2,21 +2,21 @@
 This project consists of the development of an online appointment book for hairdressers. The main objective was the development of the backend code, combining the knowledge acquired in node + express technologies, in addition to mongoDB / mongoose.
 
 ## 🚧 Made a REST API for the following:
-User registration using Bcrypt.
-User login + token + middleware.
-CRUD of the endpoints.
-Database relationships.
+- User registration using Bcrypt.
+- User login + token + middleware.
+- CRUD of the endpoints.
+- Database relationships.
 
 ## 🦾 Used technology
-MongoDB with Mongoose and Express
-Bcrypt + JWT
-Express Validator
-Cors
-Nodemon (Dev Dependency)
-Thunder Client
-DbSchema
-VsCode
-Git / GitHub
+- MongoDB with Mongoose and Express
+- Bcrypt + JWT
+- Express Validator
+- Cors
+- Nodemon (Dev Dependency)
+- Thunder Client
+- DbSchema
+- VsCode
+- Git / GitHub
 
 ## 👾 Description of the utility of the project
 The goal is create an online appointment book for customers from hairdressing services.
