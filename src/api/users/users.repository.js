@@ -21,3 +21,8 @@ export async function create({ username, password }) {
   return newUser;
 }
 
+export async function getByEmail({ email }) {
+  const user = await userModel
+    .findOne({ mail: email });
+  return user;
+}
