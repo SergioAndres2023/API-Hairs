@@ -10,3 +10,14 @@ export async function getById(req, res) {
   const userById = await userService.getById({ id });
   res.json(userById);
 }
+
+export async function patchId(req, res) {
+  const { id } = req.params;
+  const newProps = req.body;
+  if (newProps.password) {
+    res.startus(401);
+    res.json('This property cant be updeted');
+  }
+  const updatedUser = await userService.patchId({ id, newProps });
+  res.json(updatedUser);
+}
