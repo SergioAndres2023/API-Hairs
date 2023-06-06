@@ -6,4 +6,6 @@ const router = Router();
 router.get('/all', usersController.getAll);
 router.get('/:id', usersController.getById);
 
+router.patch('/:id', usersController.patchId);
+
 export default router;
