@@ -21,7 +21,7 @@ export async function create({
 }) {
   const newUser = await userModel.create({
     username, password, phone, mail, rol,
-  })
+  });
   return newUser;
 }
 
