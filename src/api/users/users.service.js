@@ -14,3 +14,8 @@ export async function patchId({ id, newProps }) {
   const updatedUser = await usersRepo.patchId({ id, newProps });
   return updatedUser;
 }
+
+export async function getByUsername({ username }) {
+  const user = await usersRepo.getByUsername({ username });
+  return user;
+}

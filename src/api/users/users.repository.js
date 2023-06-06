@@ -31,3 +31,11 @@ export async function patchId({ id, newProps }) {
     .lean();
   return updatedUser;
 }
+
+export async function getByUsername({ username }) {
+  const user = await userModel
+    .findOne({ username })
+    .lean();
+
+  return user;
+}
