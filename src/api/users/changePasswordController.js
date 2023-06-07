@@ -1,7 +1,14 @@
 import nm from 'nodemailer';
 import jwt from 'jsonwebtoken';
-// import { hashSync, compareSync } from 'bcrypt';
+import { hashSync, compareSync } from 'bcrypt';
+import * as dotenv from 'dotenv';
 import * as usersRepository from './users.repository.js';
+
+dotenv.config({});
+
+const { EMAIL, EMAIL_PASSWORD } = process.env;
+
+let tempToken;
 
 export async function changePasswordRequest(req, res) {
   const { email, password } = req.body;
@@ -19,32 +26,31 @@ export async function changePasswordRequest(req, res) {
     return;
   }
 
-  // hashear contraseña traida de "password" y comparar con user.password
-
-  // Si coinciden seguir con el programa
+  // const isAuthorized = compareSync(password, user.password);
+  // if (!isAuthorized) {
+  //   res.status(403);
+  //   res.json({ message: 'Contraseña incorrecta' });
+  //   return;
+  // }
 
   const username = user.name;
 
   try {
     const payload = { username };
-    const tempToken = jwt.sign(payload, 'esternocleidomastoideo', { expiresIn: '1h' });
-    // guardarlo el token con el id del usuario
-    // poner un timeout de 1h para eliminar el token temporal guardado
-
-    const EMAIL_PASSWORD = 'sigmatczrdofokon';
+    tempToken = jwt.sign(payload, 'esternocleidomastoideo', { expiresIn: '1h' });
 
     const transporter = nm.createTransport({
       service: 'gmail',
       auth: {
-        user: `${email}`,
-        pass: `${EMAIL_PASSWORD}`,
+        user: EMAIL,
+        pass: EMAIL_PASSWORD,
       },
     });
 
     const htmlLink = `<a href='http://localhost:3001/users/changepassword/${user.id}/${tempToken}' target='_blank'>Pincha aquí</a>`;
 
     const mailOptions = {
-      from: 'Los máquinas de TheBridge <admin@maquinasthebridge.com>',
+      from: 'Los máquinas de TheBridge <correothebridge01@gmail.com',
       to: `${email}`,
       subject: 'Enlace para recuperar su contraseña:',
       text: `localhost:3001/users/changepassword/${user.id}/${tempToken}`,
