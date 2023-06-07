@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema({
-  name: { type: String, required: [true, 'El nombre es obligatorio'] },
+  username: { type: String, required: [true, 'El nombre es obligatorio'] },
   phone: { type: String, required: true },
   mail: { type: String, required: true },
   points: { type: Number, required: true, default: 0 },

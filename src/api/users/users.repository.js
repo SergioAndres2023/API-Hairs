@@ -16,13 +16,31 @@ export async function getById({ id }) {
   return user;
 }
 
-export async function create({ username, password }) {
-  const newUser = await userModel.create({ username, password });
+export async function create({
+  username, password, phone, mail, rol,
+}) {
+  const newUser = await userModel.create({
+    username, password, phone, mail, rol,
+  });
   return newUser;
 }
 
 export async function getByEmail({ email }) {
   const user = await userModel
     .findOne({ mail: email });
+  return user;
+}
+
+export async function patchId({ id, newProps }) {
+  const query = { _id: id };
+  const updatedUser = await userModel.findOneAndUpdate(query, newProps, { new: true })
+    .lean();
+  return updatedUser;
+}
+
+export async function getByUsername({ username }) {
+  const user = await userModel
+    .findOne({ username })
+    .lean();
   return user;
 }

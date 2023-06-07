@@ -9,4 +9,6 @@ router.get('/:id', usersController.getById);
 router.post('/changepasswordrequest', changePasswordController.changePasswordRequest);
 router.get('/changepassword/:id/:token', changePasswordController.changePassword);
 
+router.patch('/:id', usersController.patchId);
+
 export default router;

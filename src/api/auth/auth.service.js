@@ -14,9 +14,15 @@ function getToken({ username }) {
   return token;
 }
 
-export async function register({ username, password }) {
+export async function register(
+  {
+    username, password, phone, mail, rol,
+  },
+) {
   const hashedPassword = hashSync(password, 10);
-  const dbUser = await usersRepository.create({ username, password: hashedPassword });
+  const dbUser = await usersRepository.create({
+    username, password: hashedPassword, phone, mail, rol,
+  });
   if (!dbUser) {
     const myError = {
       status: 500,
