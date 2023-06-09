@@ -35,12 +35,16 @@ export async function register({
     const emailToken = jwt.sign(
       { mail },
       process.env.JWT_SECRET,
-      { expiresIn: '48h' },
+      { expiresIn: process.env.JWT_EXPIRES_IN },
     );
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
       port: 587,
       secure: false,
+      // ignoreTLS: true,
+      tls: { 
+        rejectUnauthorized: false 
+    },
       auth: {
         user: process.env.MAIL_ADDRESS,
         pass: process.env.MAIL_PASSWORD,
@@ -49,14 +53,14 @@ export async function register({
     // eslint-disable-next-line prefer-template
     const url = 'https:///' + emailToken;
     await transporter.sendMail({
-      from: '"FullStack PartTime" <theBridgeFsPt@outlook.com>',
+      from: '"FullStack PartTime" <theBridgeFsPt@gmx.es>',
       to: 'jcm.odero@gmail.com',
       subject: 'Confirma tu registro huevón',
       html: `<h3>Bienvenido, estás a un paso de registrarte🚶</h3>
     <h2><a href="${url}">👉 Click aqui para confirmar tu registro 👈</a></h2>
     `,
     });
-    // res.status(201).send({ msg: 'Usuario registrado con éxito', dbUser });
+    console.log('Usuario registrado con éxito. Valida tu usuario en el enlace recibido en ' + mail, dbUser);
   } catch (error) {
     console.error('error', error);
   }
@@ -74,7 +78,7 @@ export async function confirm(req, res) {
       },
     );
 
-    // res.status(201).send('Usuario confirmado con éxito');
+    console.log('Usuario confirmado con éxito');
   } catch (error) {
     console.error(error);
   }
