@@ -17,6 +17,7 @@ router.use('/users', auth, usersRouter);
 
 router.post('/register', auth, authController.register);
 router.post('/login', auth, authController.login);
-// router.get('/confirm/:email', authController.confirm);
+
+router.get('/confirm/:emailtoken', authController.confirm);
 
 export default router;
