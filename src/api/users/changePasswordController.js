@@ -75,8 +75,8 @@ export async function changePasswordRequest(req, res) {
 export async function changePassword(req, res) {
   const { id, token } = req.params;
   console.log(`Entrando en 'changePassword' con id usuario (${id} y token (${token}))`);
-  // recuperar token guardado y commparar con el token recibido en la funcion
-  // si son iguales (todavia existe el token) permitir cambiar la contraseña, hashearla y guardarla
+  // Comparar tempToken con el token recibido en la funcion
+  // Si son iguales y todavia válido tempToken permitir cambiar la contraseña, hashearla y guardarla
   // si distinto o token caducado enviar mensaje con link de nueva peticion de cambio de contraseña
   res.json('Saliendo de changePassword');
 }
