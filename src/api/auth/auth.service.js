@@ -6,9 +6,10 @@ function getToken({ username }) {
   const payload = {
     username,
   };
+  const { AUTH_SECRET_KEY, AUTH_EXPIRES_IN } = process.env;
 
-  const token = jwt.sign(payload, 'secretWord', {
-    expiresIn: 60 * 60,
+  const token = jwt.sign(payload, AUTH_SECRET_KEY, {
+    expiresIn: AUTH_EXPIRES_IN,
   });
 
   return token;
