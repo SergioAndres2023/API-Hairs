@@ -39,3 +39,17 @@ export async function getByUsername({ username }) {
 
   return user;
 }
+
+export async function confirm({ payload }) {
+  try {
+    await userModel.updateOne(
+      { mail: payload.mail },
+      {
+        confirmed: true,
+      },
+    );
+    console.log('Usuario confirmado con éxito');
+  } catch (error) {
+    console.error(error);
+  }
+}

@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 import { hashSync, compareSync } from 'bcrypt';
 import nodemailer from 'nodemailer';
 import * as usersRepository from '../users/users.repository.js';
-import userModel from '../users/users.model.js';
 
 function getToken({ username }) {
   const payload = {
@@ -69,13 +68,7 @@ export async function confirm({ emailtoken }) {
   try {
     const token = emailtoken;
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    await userModel.updateOne(
-      { mail: payload.mail },
-
-      {
-        confirmed: true,
-      },
-    );
+    await usersRepository.confirm({ payload });
     console.log('Usuario confirmado con éxito');
   } catch (error) {
     console.error(error);
