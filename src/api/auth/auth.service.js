@@ -4,6 +4,18 @@ import nodemailer from 'nodemailer';
 import * as usersRepository from '../users/users.repository.js';
 import userModel from '../users/users.model.js';
 
+function getToken({ username }) {
+  const payload = {
+    username,
+  };
+
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: 60 * 60,
+  });
+
+  return token;
+}
+
 export async function register({
   username, password, phone, mail, rol,
 }) {
@@ -90,4 +102,16 @@ export async function login({ username, password }) {
 
     throw new Error(JSON.stringify(myError));
   }
+
+  const token = getToken({ username: dbUser.username });
+  if (!token) {
+    const myError = {
+      status: 500,
+      message: 'Some problem generating token',
+    };
+
+    throw new Error(JSON.stringify(myError));
+  }
+
+  return token;
 }
