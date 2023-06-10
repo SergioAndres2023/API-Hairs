@@ -7,7 +7,7 @@ router.get('/all', servicesController.getAll);
 
 router.post('/', servicesController.create);
 
-router.patch('/delete/:id', servicesController.archive);
+router.patch('/archive/:id', servicesController.archive);
 router.patch('/:id', servicesController.update);
 
 export default router;
