@@ -10,10 +10,11 @@ function middleware(req, res, next) {
   const publicRoutes = [
     '/login',
     '/register',
-    '/all',
-    '/filter',
     '/users/changepasswordrequest',
     '/users/changepassword',
+    '/bookings/day',
+    '/services/all',
+    '/awards/all',
   ];
 
   const requestUrl = req.url;
