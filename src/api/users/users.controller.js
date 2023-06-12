@@ -21,3 +21,57 @@ export async function patchId(req, res) {
   const updatedUser = await userService.patchId({ id, newProps });
   res.json(updatedUser);
 }
+
+export async function changePasswordRequest(req, res) {
+  const { email } = req.body;
+
+  if (email === '') {
+    res.status(400);
+    res.json({ message: 'Empty email' });
+    return;
+  }
+
+  try {
+    await userService.changePasswordRequest({ email });
+  } catch (error) {
+    const myError = JSON.parse(error.message);
+    res.status(myError.status);
+    res.json(myError.message);
+    return;
+  }
+  res.status(200);
+  res.json(`Email sent to ${email}`);
+}
+
+export async function changePassword(req, res) {
+  // const { token } = req.headers.authorization;
+  const { token } = req.params;
+  const { password } = req.body;
+
+  if (!token || !password) {
+    res.status(405);
+    res.json({ message: 'Authentication failed' });
+    return;
+  }
+
+  let email;
+  try {
+    email = await userService.changePassword({ token });
+  } catch (error) {
+    const myError = JSON.parse(error.message);
+    res.status(myError.status);
+    res.json(myError.message);
+    return;
+  }
+
+  let updatedUser;
+  try {
+    updatedUser = await userService.updateByEmail({ email, password });
+  } catch (error) {
+    const myError = JSON.parse(error.message);
+    res.status(myError.status);
+    res.json(myError.message);
+    return;
+  }
+  res.json(updatedUser);
+}

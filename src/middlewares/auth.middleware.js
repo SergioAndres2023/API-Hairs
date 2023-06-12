@@ -12,15 +12,24 @@ function middleware(req, res, next) {
     '/register',
     '/all',
     '/filter',
+    '/users/changepasswordrequest',
+    '/users/changepassword',
   ];
 
-  const isPublicRoute = publicRoutes.some((publicRoute) => publicRoute === req.url);
+  const requestUrl = req.url;
+
+  const isPublicRoute = publicRoutes.some((publicRoute) => {
+    const includePublicRoute = requestUrl.includes(publicRoute);
+    return includePublicRoute;
+  });
+
   if (isPublicRoute) {
     next();
     return;
   }
 
   const token = req.headers.authorization;
+
   if (!token) {
     unauthorized(res);
     return;
