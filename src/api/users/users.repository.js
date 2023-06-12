@@ -40,16 +40,12 @@ export async function getByUsername({ username }) {
   return user;
 }
 
-export async function confirm({ mail }) {
-  try {
-    await userModel.updateOne(
-      { mail },
-      {
-        confirmed: true,
-      },
-    );
-    console.log('Usuario confirmado con éxito');
-  } catch (error) {
-    console.error(error);
-  }
+export async function confirm({ username }) {
+  const userConfirmed = await userModel.updateOne(
+    { username },
+    {
+      confirmed: true,
+    },
+  );
+  return userConfirmed;
 }

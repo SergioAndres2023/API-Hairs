@@ -64,10 +64,17 @@ export async function register({
 
 export async function confirm({ emailtoken }) {
   try {
-    const token = emailtoken;
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    await usersRepository.confirm({ mail: payload.mail });
-    console.log('Usuario confirmado con éxito');
+    const tokenConfirmedEmail = emailtoken;
+    let username;
+    jwt.verify(tokenConfirmedEmail, process.env.JWT_SECRET, async (err, payload) => {
+      if (err) {
+        console.log('err.message', err.message);
+      } else {
+        console.log('payload', payload);
+        username = payload.username;
+      }
+    });
+    await usersRepository.confirm({ username });
   } catch (error) {
     console.error(error);
   }
