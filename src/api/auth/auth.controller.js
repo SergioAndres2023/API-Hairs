@@ -47,3 +47,9 @@ export async function login(req, res) {
 
   res.json({ token });
 }
+
+export async function confirm(req, res) {
+  const { emailtoken } = req.params;
+  await authService.confirm({ emailtoken });
+  res.json('Usuario Confirmado HTML');
+}

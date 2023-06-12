@@ -10,8 +10,9 @@ function middleware(req, res, next) {
   const publicRoutes = [
     '/login',
     '/register',
-    '/all',
-    '/filter',
+    '/bookings/day',
+    '/services/all',
+    '/awards/all',
   ];
 
   const isPublicRoute = publicRoutes.some((publicRoute) => publicRoute === req.url);
