@@ -9,7 +9,7 @@ function getToken({ username }) {
   };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: 60 * 60,
+    expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
   return token;
@@ -31,11 +31,9 @@ export async function register({
 
       throw new Error(JSON.stringify(myError));
     }
-    const emailToken = jwt.sign(
-      { mail },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRES_IN },
-    );
+
+    const emailToken = getToken({ username });
+
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
       port: 587,
@@ -68,7 +66,7 @@ export async function confirm({ emailtoken }) {
   try {
     const token = emailtoken;
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    await usersRepository.confirm({ payload });
+    await usersRepository.confirm({ mail: payload.mail });
     console.log('Usuario confirmado con éxito');
   } catch (error) {
     console.error(error);

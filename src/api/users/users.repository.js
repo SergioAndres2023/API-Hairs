@@ -40,10 +40,10 @@ export async function getByUsername({ username }) {
   return user;
 }
 
-export async function confirm({ payload }) {
+export async function confirm({ mail }) {
   try {
     await userModel.updateOne(
-      { mail: payload.mail },
+      { mail },
       {
         confirmed: true,
       },
