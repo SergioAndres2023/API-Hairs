@@ -44,11 +44,16 @@ export async function changePasswordRequest(req, res) {
 }
 
 export async function changePassword(req, res) {
-  // const { token } = req.headers.authorization;
   const { token } = req.params;
-  const { password } = req.body;
+  const { password, repeatedPassword } = req.body;
 
-  if (!token || !password) {
+  if (!token || !password || !repeatedPassword) {
+    res.status(405);
+    res.json({ message: 'Authentication failed' });
+    return;
+  }
+
+  if (!(password === repeatedPassword)) {
     res.status(405);
     res.json({ message: 'Authentication failed' });
     return;

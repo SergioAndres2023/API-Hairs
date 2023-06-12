@@ -60,7 +60,7 @@ export async function changePassword({ token }) {
   let email;
   jwt.verify(token, JWT_SECRET, async (error, payload) => {
     if (error) {
-      const myError = { status: 403, message: 'Authentication failed' };
+      const myError = { status: 403, message: 'Token error' };
       throw new Error(JSON.stringify(myError));
     }
     email = payload.email;
