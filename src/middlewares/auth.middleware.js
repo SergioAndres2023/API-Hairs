@@ -10,7 +10,7 @@ function middleware(req, res, next) {
   const publicRoutes = [
     '/login',
     '/register',
-    '/bookings/day/:date',
+    '/bookings/day',
     '/services/all',
     '/awards/all',
   ];
