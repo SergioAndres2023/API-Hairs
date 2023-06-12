@@ -15,7 +15,13 @@ function middleware(req, res, next) {
     '/awards/all',
   ];
 
-  const isPublicRoute = publicRoutes.some((publicRoute) => publicRoute === req.url);
+  const isPublicRoute = publicRoutes.some((publicRoute) => {
+    if (isPublicRoute === '/bookings/day') {
+      return req.url.startsWith('/bookings/day');
+    }
+    return publicRoute === req.url;
+  });
+
   if (isPublicRoute) {
     next();
     return;
