@@ -1,7 +1,6 @@
-import nm from 'nodemailer';
+import nodemailer from 'nodemailer';
 import jwt from 'jsonwebtoken';
 import { hashSync } from 'bcrypt';
-import * as dotenv from 'dotenv';
 import * as usersRepo from './users.repository.js';
 
 export async function getAll() {
@@ -13,8 +12,6 @@ export async function getById({ id }) {
   const user = await usersRepo.getById({ id });
   return user;
 }
-
-dotenv.config();
 
 const {
   EMAIL, EMAIL_PASSWORD, HOST, CHANGE_PASSWORD_ROUTE, JWT_SECRET, JWT_EXPIRES_IN,
@@ -30,7 +27,7 @@ export async function changePasswordRequest({ email }) {
   const payload = { email };
   const tempToken = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
-  const transporter = nm.createTransport({
+  const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: EMAIL,
@@ -41,7 +38,7 @@ export async function changePasswordRequest({ email }) {
   const htmlLink = `<a href='${HOST}${CHANGE_PASSWORD_ROUTE}${tempToken}' target='_blank'>Pincha aquí</a>`;
 
   const mailOptions = {
-    from: 'Los máquinas de TheBridge <correothebridge01@gmail.com',
+    from: 'Los máquinas de TheBridge <correothebridge01@gmail.com>',
     to: `${email}`,
     subject: 'Enlace para recuperar su contraseña:',
     text: `localhost:3001/users/changepassword/${tempToken}`,
@@ -57,15 +54,13 @@ export async function changePasswordRequest({ email }) {
 }
 
 export async function changePassword({ token }) {
-  let email;
   jwt.verify(token, JWT_SECRET, async (error, payload) => {
     if (error) {
       const myError = { status: 403, message: 'Token error' };
       throw new Error(JSON.stringify(myError));
     }
-    email = payload.email;
+    return payload.email;
   });
-  return email;
 }
 
 export async function updateByEmail({ email, password }) {

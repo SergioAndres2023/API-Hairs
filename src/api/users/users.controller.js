@@ -25,7 +25,7 @@ export async function patchId(req, res) {
 export async function changePasswordRequest(req, res) {
   const { email } = req.body;
 
-  if (email === '') {
+  if (!email) {
     res.status(400);
     res.json({ message: 'Empty email' });
     return;
@@ -53,7 +53,7 @@ export async function changePassword(req, res) {
     return;
   }
 
-  if (!(password === repeatedPassword)) {
+  if (password !== repeatedPassword) {
     res.status(405);
     res.json({ message: 'Authentication failed' });
     return;
