@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "jest --watchAll --coverage"
+    "dev": "nodemon index.js"
   },
   "author": "Sergio Andrés",
   "license": "ISC",
