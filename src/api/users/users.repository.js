@@ -39,3 +39,13 @@ export async function getByUsername({ username }) {
 
   return user;
 }
+
+export async function confirm({ username }) {
+  const userConfirmed = await userModel.updateOne(
+    { username },
+    {
+      confirmed: true,
+    },
+  );
+  return userConfirmed;
+}

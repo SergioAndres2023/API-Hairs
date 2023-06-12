@@ -8,6 +8,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   deleted: { type: Boolean, required: true, default: false },
   rol: { type: String, required: true, enum: ['admin', 'client'] },
+  confirmed: { type: Boolean, required: true, default: false },
 });
 
 const userModel = model('User', userSchema);
