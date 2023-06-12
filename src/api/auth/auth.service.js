@@ -33,6 +33,14 @@ export async function register({
     }
 
     const emailToken = getToken({ username });
+    if (!emailToken) {
+      const myError = {
+        status: 500,
+        message: 'Some problem generating token',
+      };
+
+      throw new Error(JSON.stringify(myError));
+    }
 
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
@@ -46,7 +54,7 @@ export async function register({
         pass: process.env.MAIL_PASSWORD,
       },
     });
-    const url = `http://localhost:3001/confirm/${emailToken}`;
+    const url = process.env.URL_CONFIRM + emailToken;
     await transporter.sendMail({
       from: '"FullStack PartTime" <theBridgeFsPt@gmx.es>',
       to: 'jcm.odero@gmail.com',
@@ -68,9 +76,8 @@ export async function confirm({ emailtoken }) {
     let username;
     jwt.verify(tokenConfirmedEmail, process.env.JWT_SECRET, async (err, payload) => {
       if (err) {
-        console.log('err.message', err.message);
+        console.error(err.message);
       } else {
-        console.log('payload', payload);
         username = payload.username;
       }
     });
