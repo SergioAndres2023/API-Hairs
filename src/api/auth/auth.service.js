@@ -43,18 +43,18 @@ export async function register({
     }
 
     const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
-      port: 587,
+      host: process.env.EMAIL_HOST,
+      port: process.env.EMAIL_PORT,
       secure: false,
       tls: {
         rejectUnauthorized: false,
       },
       auth: {
-        user: process.env.MAIL_ADDRESS,
-        pass: process.env.MAIL_PASSWORD,
+        user: process.env.EMAIL_ADDRESS,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
-    const url = process.env.URL_CONFIRM + emailToken;
+    const url = process.env.HOST + process.env.URL_CONFIRM + emailToken;
     await transporter.sendMail({
       from: '"FullStack PartTime" <theBridgeFsPt@gmx.es>',
       to: 'jcm.odero@gmail.com',
