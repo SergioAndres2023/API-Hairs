@@ -28,8 +28,22 @@ export async function create({
   return newUser;
 }
 
+export async function getByEmail({ email }) {
+  const user = await userModel
+    .findOne({ mail: email });
+  return user;
+}
+
 export async function patchId({ id, newProps }) {
   const query = { _id: id };
+  const updatedUser = await userModel.findOneAndUpdate(query, newProps, { new: true })
+    .lean();
+  return updatedUser;
+}
+
+export async function updateByEmail({ email, hashedPassword }) {
+  const query = { mail: email };
+  const newProps = { password: hashedPassword };
   const updatedUser = await userModel.findOneAndUpdate(query, newProps, { new: true })
     .lean();
   return updatedUser;
@@ -39,7 +53,6 @@ export async function getByUsername({ username }) {
   const user = await userModel
     .findOne({ username })
     .lean();
-
   return user;
 }
 
