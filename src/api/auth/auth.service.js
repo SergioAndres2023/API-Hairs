@@ -43,20 +43,15 @@ export async function register({
     }
 
     const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
-      port: 587,
-      secure: false,
-      tls: {
-        rejectUnauthorized: false,
-      },
+      service: 'gmail',
       auth: {
-        user: process.env.MAIL_ADDRESS,
-        pass: process.env.MAIL_PASSWORD,
+        user: process.env.EMAIL_ADDRESS,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
-    const url = process.env.URL_CONFIRM + emailToken;
+    const url = process.env.HOST + process.env.CONFIRM_ROUTE + emailToken;
     await transporter.sendMail({
-      from: '"FullStack PartTime" <theBridgeFsPt@gmx.es>',
+      from: '"FullStack PartTime" <correothebridge01@gmail.com>',
       to: 'jcm.odero@gmail.com',
       subject: 'Confirma tu registro huevón',
       html: `<img src="https://static.vecteezy.com/system/resources/previews/000/599/237/large_2x/hair-and-face-salon-logo-vector-templates.jpg" width="250px">
