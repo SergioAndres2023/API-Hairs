@@ -1,4 +1,4 @@
-import unauthorized from '../middlewares/auth.middleware.js';
+import unauthorized from './auth.middleware.js';
 
 function middlewareAdmin(req, res, next) {
   if (req.user.rol !== 'admin') {
