@@ -14,7 +14,7 @@ export async function getById({ id }) {
 }
 
 const {
-  EMAIL, EMAIL_PASSWORD, HOST, CHANGE_PASSWORD_ROUTE, JWT_SECRET, JWT_EXPIRES_IN,
+  EMAIL_ADDRESS, EMAIL_PASSWORD, HOST, CHANGE_PASSWORD_ROUTE, JWT_SECRET, JWT_EXPIRES_IN,
 } = process.env;
 
 export async function changePasswordRequest({ email }) {
@@ -30,7 +30,7 @@ export async function changePasswordRequest({ email }) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: EMAIL,
+      user: EMAIL_ADDRESS,
       pass: EMAIL_PASSWORD,
     },
   });
