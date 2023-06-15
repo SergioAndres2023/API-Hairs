@@ -9,6 +9,6 @@ router.get('/:id', admin, usersController.getById);
 router.post('/changepasswordrequest', usersController.changePasswordRequest);
 router.post('/changepassword/:token', usersController.changePassword);
 
-router.patch('/:id', admin, usersController.patchId);
+router.patch('/:id', (req, res, next) => admin(req, res, next, { allowOwnUser: true, collection: 'users' }), usersController.patchId);
 
 export default router;

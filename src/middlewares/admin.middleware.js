@@ -1,11 +1,11 @@
 import unauthorized from './auth.middleware.js';
 
-function middlewareAdmin(req, res, next) {
-  if (req.user.rol !== 'admin') {
-    unauthorized(res);
+function middlewareAdmin(req, res, next, { allowOwnUser, collection }) {
+  if (req.user.rol === 'admin' || (allowOwnUser && req.user.id === req.params.id)) {
+    next();
     return;
   }
-  next();
+  unauthorized(res);
 }
 
 export default middlewareAdmin;
