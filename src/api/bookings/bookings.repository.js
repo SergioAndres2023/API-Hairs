@@ -38,3 +38,11 @@ export async function update({ id, bookingData }) {
     .lean();
   return updatedBooking;
 }
+
+export async function getById({ id }) {
+  const booking = await bookingModel
+    .findById(id)
+    .lean();
+
+  return booking;
+}
