@@ -5,10 +5,19 @@ import admin from '../../middlewares/admin.middleware.js';
 const router = Router();
 
 router.get('/all', admin, usersController.getAll);
-router.get('/:id', admin, usersController.getById);
+router.get(
+  '/:id',
+  (req, res, next) => admin(req, res, next, { allowOwnUser: true, collection: 'users' }),
+  usersController.getById,
+);
+
 router.post('/changepasswordrequest', usersController.changePasswordRequest);
 router.post('/changepassword/:token', usersController.changePassword);
 
-router.patch('/:id', (req, res, next) => admin(req, res, next, { allowOwnUser: true, collection: 'users' }), usersController.patchId);
+router.patch(
+  '/:id',
+  (req, res, next) => admin(req, res, next, { allowOwnUser: true, collection: 'users' }),
+  usersController.patchId,
+);
 
 export default router;
