@@ -12,11 +12,6 @@ export async function register(req, res) {
     return;
   }
 
-  if (rol && rol !== 'client') {
-    res.status(400);
-    res.json('Empty required params');
-  }
-
   try {
     token = await authService.register({
       username, password, mail, rol: 'client',
