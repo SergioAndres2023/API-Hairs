@@ -2,11 +2,11 @@ import * as authService from './auth.service.js';
 
 export async function register(req, res) {
   const {
-    username, password, phone, mail, rol,
+    username, password, mail,
   } = req.body;
   let token;
 
-  if (!username || !password || !phone || !mail || !rol) {
+  if (!username || !password || !mail) {
     res.status(400);
     res.json('Empty required params');
     return;
@@ -14,7 +14,7 @@ export async function register(req, res) {
 
   try {
     token = await authService.register({
-      username, password, phone, mail, rol,
+      username, password, mail, rol: 'client',
     });
   } catch (err) {
     const myError = JSON.parse(err.message);
