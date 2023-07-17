@@ -1,6 +1,14 @@
 import * as authService from './auth.service.js';
 import * as usersRepository from '../users/users.repository.js';
 
+function isValidEmail(mail) {
+  const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+  if (validEmail.test(mail)) {
+    return true;
+  }
+  return false;
+}
+
 export async function register(req, res) {
   const {
     username, password, mail,
@@ -11,6 +19,12 @@ export async function register(req, res) {
   if (!username || !password || !mail) {
     res.status(400);
     res.json('Empty required params');
+    return;
+  }
+
+  if (!isValidEmail(mail)) {
+    res.status(400);
+    res.json('Invalid email');
     return;
   }
 
