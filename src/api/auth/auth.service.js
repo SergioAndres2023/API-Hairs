@@ -18,6 +18,7 @@ function getToken({ username }) {
 export async function register({
   username, password, mail, rol,
 }) {
+  let token;
   try {
     const hashedPassword = hashSync(password, 10);
     const dbUser = await usersRepository.create({
@@ -41,6 +42,7 @@ export async function register({
 
       throw new Error(JSON.stringify(myError));
     }
+    token = emailToken;
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -63,6 +65,7 @@ export async function register({
   } catch (error) {
     console.error('error', error);
   }
+  return token;
 }
 
 export async function confirm({ emailtoken }) {

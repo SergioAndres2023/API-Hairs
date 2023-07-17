@@ -1,14 +1,23 @@
 import * as authService from './auth.service.js';
+import * as usersRepository from '../users/users.repository.js';
 
 export async function register(req, res) {
   const {
     username, password, mail,
   } = req.body;
+
   let token;
 
   if (!username || !password || !mail) {
     res.status(400);
     res.json('Empty required params');
+    return;
+  }
+
+  const userExists = await usersRepository.getByEmail({ mail });
+  if (userExists) {
+    res.status(400);
+    res.json('User exists');
     return;
   }
 

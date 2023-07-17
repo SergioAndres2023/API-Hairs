@@ -15,6 +15,7 @@ function middleware(req, res, next) {
     '/bookings/day',
     '/services/all',
     '/awards/all',
+    '/confirm',
   ];
 
   const requestUrl = req.url;
@@ -36,7 +37,7 @@ function middleware(req, res, next) {
     return;
   }
 
-  jwt.verify(token, 'secretWord', async (error, payload) => {
+  jwt.verify(token, process.env.JWT_SECRET, async (error, payload) => {
     if (error) {
       console.error('ERROR!', error.message);
       return unauthorized(res);
