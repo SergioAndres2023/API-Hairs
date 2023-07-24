@@ -28,10 +28,18 @@ export async function register(req, res) {
     return;
   }
 
-  const userExists = await usersRepository.getByEmail({ mail });
+  const userEmailExists = await usersRepository.getByEmail({ mail });
 
-  if (userExists) {
+  if (userEmailExists) {
     const resobj = { ok: false, statusText: 'Email exists' };
+    res.json(resobj);
+    return;
+  }
+
+  const usernameExists = await usersRepository.getByUsername({ username });
+
+  if (usernameExists) {
+    const resobj = { ok: false, statusText: 'Username exists' };
     res.json(resobj);
     return;
   }
@@ -55,8 +63,8 @@ export async function login(req, res) {
   let token;
 
   if (!username || !password) {
-    res.status(400);
-    res.json('Empty required params');
+    const resobj = { ok: false, statusText: 'Empty required params' };
+    res.json(resobj);
     return;
   }
 
@@ -64,8 +72,8 @@ export async function login(req, res) {
     token = await authService.login({ username, password });
   } catch (err) {
     const myError = JSON.parse(err.message);
-    res.status(myError.status);
-    res.json(myError.message);
+    // res.status(myError.status);
+    res.json(myError);
     return;
   }
 

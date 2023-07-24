@@ -3,6 +3,10 @@ import jwt from 'jsonwebtoken';
 import { hashSync } from 'bcrypt';
 import * as usersRepo from './users.repository.js';
 
+const {
+  EMAIL_ADDRESS, EMAIL_PASSWORD, HOST, CHANGE_PASSWORD_ROUTE, JWT_SECRET, JWT_EXPIRES_IN,
+} = process.env;
+
 export async function getAll() {
   const users = await usersRepo.getAll();
   return users;
@@ -12,10 +16,6 @@ export async function getById({ id }) {
   const user = await usersRepo.getById({ id });
   return user;
 }
-
-const {
-  EMAIL_ADDRESS, EMAIL_PASSWORD, HOST, CHANGE_PASSWORD_ROUTE, JWT_SECRET, JWT_EXPIRES_IN,
-} = process.env;
 
 export async function changePasswordRequest({ email }) {
   const user = await usersRepo.getByEmail({ email });

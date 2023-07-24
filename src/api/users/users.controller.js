@@ -80,3 +80,7 @@ export async function changePassword(req, res) {
   }
   res.json(updatedUser);
 }
+
+export async function getUsernameByToken(req, res) {
+  res.json(req.user);
+}
